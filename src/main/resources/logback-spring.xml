@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--debug <info<warn<error-->
+<configuration>
+    <!--全局变量-->
+    <!--[ 2018-07-12 19:02:21 - restartedMain- WARN  - MyApplicationRunner2.java- run - 44 ] warn-->
+    <!-- [%d{yyyy-MM-dd HH:mm:ss} - %thread- %-5level - %F- %M - %L] %msg%n -->
+    <property name="log.pattern" value="[%d{yyyy-MM-dd HH:mm:ss} - %-5level - %F- %M - %L] %msg%n"/>
+
+    <property name="log.basePath" value="logs"/>
+
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %F类名,%M方法名  %msg：日志消息，%n是换行符-->
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--滚动策略按照天-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${log.basePath}/info.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--ThresholdFilter： 临界值过滤器，过滤掉低于(<)指定临界值的日志,当日志级别低于临界值时，日志会被拒绝。-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--滚动策略按照天-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${log.basePath}/error.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="file—net" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--滚动策略按照天-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${log.basePath}/net.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="file—config" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--滚动策略按照天-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${log.basePath}/config.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="file—gmt" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--滚动策略按照天-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${log.basePath}/gmt.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="consoleLog"/>
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileErrorLog"/>
+    </root>
+    <!--
+        配置自定义标签的log
+        Logger log = LoggerFactory.getLogger("runner1");
+        additivity="true" 表示runner1的日志是否会在root里面出现 true 出现
+        false 就是runner1的日志只会在file-runner1里面出现
+    -->
+    <logger name="net" additivity="true">
+        <appender-ref ref="file—net"/>
+    </logger>
+
+    <logger name="config" additivity="true">
+        <appender-ref ref="file—config"/>
+    </logger>
+
+    <logger name="gmt" additivity="true">
+        <appender-ref ref="file—gmt"/>
+    </logger>
+</configuration>

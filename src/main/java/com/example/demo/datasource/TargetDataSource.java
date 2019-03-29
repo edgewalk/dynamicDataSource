@@ -1,0 +1,13 @@
+package com.example.demo.datasource;
+
+import java.lang.annotation.*;
+
+/**
+ * 在方法/类上使用，用于指定使用哪个数据源
+ */
+@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface TargetDataSource {
+    String value();
+}
