@@ -86,6 +86,7 @@
         <appender-ref ref="fileInfoLog"/>
         <appender-ref ref="fileErrorLog"/>
     </root>
+    <logger name="com.example.demo.mapper" level="DEBUG"/>
     <!--
         配置自定义标签的log
         Logger log = LoggerFactory.getLogger("runner1");

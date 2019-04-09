@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.datasource.TargetDataSource;
 import com.example.demo.entity.UserAddress;
 import com.example.demo.mapper.UserAddressMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-@TargetDataSource("db1")
+//@TargetDataSource("db1")
 public class UserService {
 
     @Autowired
